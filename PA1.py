@@ -43,5 +43,4 @@ else:
 start = Node(start)
 goal = Node(goal)
 #print(sys.argv[1])
-start.printstate()
-goal.printstate()
+start.debug()
