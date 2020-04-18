@@ -69,7 +69,6 @@ def bfsdebug(problem):
 	
 	frontier = [startnode.state] #making frontier
 	explored = {} #{tuple(startnode.state):startnode.cost}#making explored hash table
-	
 	counter = 0	
 	while len(frontier) != 0:
 		newnode = Node(frontier.pop(0))

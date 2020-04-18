@@ -7,7 +7,7 @@ br = 5
 
 
 class Node:
-	def __init__(self,state,parent = None ,cost = 0):
+	def __init__(self,state,cost=0,parent=None):
 		self.actions = []
 		
 		self.state   = state
@@ -61,21 +61,21 @@ class Node:
 		if self.legalmove():
 			if self.state[br]:
 				if self.state[cr] >= 2:
-					newnode = Node(self.state[:],self,self.cost + 1)
+					newnode = Node(self.state[:],self.cost,self)
 					newnode.state[cr] = newnode.state[cr] - 2
 					newnode.state[cl] = newnode.state[cl] + 2
 					newnode.state[br] = 0
 					newnode.state[bl] = 1
 					self.actions.append(newnode)
 				if self.state[wr] >= 2:
-					newnode = Node(self.state[:],self,self.cost + 1)
+					newnode = Node(self.state[:],self.cost,self)
 					newnode.state[wr] = newnode.state[wr] - 2
 					newnode.state[wl] = newnode.state[wl] + 2
 					newnode.state[br] = 0
 					newnode.state[bl] = 1
 					self.actions.append(newnode)
 				if self.state[cr] >= 1 and self.state[wr] >= 1:
-					newnode = Node(self.state[:],self,self.cost + 1)
+					newnode = Node(self.state[:],self.cost,self)
 					newnode.state[cr] = newnode.state[cr] - 1
 					newnode.state[cl] = newnode.state[cl] + 1
 					newnode.state[wr] = newnode.state[wr] - 1
@@ -84,14 +84,14 @@ class Node:
 					newnode.state[bl] = 1
 					self.actions.append(newnode)
 				if self.state[cr] >= 1:
-					newnode = Node(self.state[:],self,self.cost + 1)
+					newnode = Node(self.state[:],self.cost,self)
 					newnode.state[cr] = newnode.state[cr] - 1
 					newnode.state[cl] = newnode.state[cl] + 1
 					newnode.state[br] = 0
 					newnode.state[bl] = 1
 					self.actions.append(newnode)
 				if self.state[wr] >= 1:
-					newnode = Node(self.state[:],self,self.cost + 1)
+					newnode = Node(self.state[:],self.cost,self)
 					newnode.state[wr] = newnode.state[wr] - 1
 					newnode.state[wl] = newnode.state[wl] + 1
 					newnode.state[br] = 0
@@ -99,21 +99,21 @@ class Node:
 					self.actions.append(newnode)
 			else:		
 				if self.state[cl] >= 2:
-					newnode = Node(self.state[:],self,self.cost + 1)
+					newnode = Node(self.state[:],self.cost,self)
 					newnode.state[cl] = newnode.state[cl] - 2
 					newnode.state[cr] = newnode.state[cr] + 2
 					newnode.state[bl] = 0
 					newnode.state[br] = 1
 					self.actions.append(newnode)
 				if self.state[wl] >= 2:
-					newnode = Node(self.state[:],self,self.cost + 1)
+					newnode = Node(self.state[:],self.cost,self)
 					newnode.state[wl] = newnode.state[wl] - 2
 					newnode.state[wr] = newnode.state[wr] + 2
 					newnode.state[bl] = 0
 					newnode.state[br] = 1
 					self.actions.append(newnode)
 				if self.state[cl] >= 1 and self.state[wl] >= 1:
-					newnode = Node(self.state[:],self,self.cost + 1)
+					newnode = Node(self.state[:],self.cost,self)
 					newnode.state[cl] = newnode.state[cl] - 1
 					newnode.state[cr] = newnode.state[cr] + 1
 					newnode.state[wl] = newnode.state[wl] - 1
@@ -122,14 +122,14 @@ class Node:
 					newnode.state[br] = 1
 					self.actions.append(newnode)
 				if self.state[cl] >= 1:
-					newnode = Node(self.state[:],self,self.cost + 1)
+					newnode = Node(self.state[:],self.cost,self)
 					newnode.state[cl] = newnode.state[cl] - 1
 					newnode.state[cr] = newnode.state[cr] + 1
 					newnode.state[bl] = 0
 					newnode.state[br] = 1
 					self.actions.append(newnode)
 				if self.state[wl] >= 1:
-					newnode = Node(self.state[:],self,self.cost + 1)
+					newnode = Node(self.state[:],self.cost,self)
 					newnode.state[wl] = newnode.state[wl] - 1
 					newnode.state[wr] = newnode.state[wr] + 1
 					newnode.state[bl] = 0

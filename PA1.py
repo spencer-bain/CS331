@@ -50,7 +50,9 @@ goal = Node(goal)
 
 problem = Problem(start,goal)
 #test = bfs(problem)
-test = dfs(problem)
+#test = dfs(problem)
+
+test = bfsdebug(problem)
 print(bool(test))
 
 #testnode = Node(list([2,1,0,1,2,1]))
