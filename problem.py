@@ -7,9 +7,12 @@ class Problem:
 		self.start = start
 		self.goal = goal
 	
-	def goaltest(self,child)
-		if(self.goal = child.state):
+	def goaltest(self,child):
+		if(self.goal.state == child.state):
 			return True
 		else:
 			return False
-		
+
+	def actions(self,node):
+		node.generatechildren()
+		return node.actions

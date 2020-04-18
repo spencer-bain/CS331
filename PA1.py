@@ -42,7 +42,16 @@ elif str(mode)=='astar':
 else:
 	print('error')
 
+
 start = Node(start)
 goal = Node(goal)
+#start.debug()
+#goal.debug()
+
 problem = Problem(start,goal)
-test = bfs(problem)
+#test = bfs(problem)
+test = dfs(problem)
+print(bool(test))
+
+#testnode = Node(list([2,1,0,1,2,1]))
+#testnode.debug()
