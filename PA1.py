@@ -7,6 +7,9 @@ argument = sys.argv
 goal = []
 start = []
 
+#Reading in arguments as follows, PA1.py [start.txt] [goal.txt] [search arg]
+#Arguments can be the following: bfs, dfs, iddfs, astar
+
 def grabaline(filehandel,listtoappend):
 	yeah = filehandel.read(1)
 	while yeah != '\n':

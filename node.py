@@ -1,3 +1,7 @@
+#The following formats as such
+#chickens, wolves, boat
+#[cl, wl, bl] left side of bank
+#[cr, wc, br] right side of bank
 cl = 0
 wl = 1
 bl = 2
@@ -14,9 +18,12 @@ class Node:
 		self.action4 = None
 		self.action5 = None
 		
+		#current state
 		self.state   = state
+		#parent node
 		self.parent  = parent
-		self.cost    = cost
+		#current cost = parent.cost + 1
+		self.cost    = parent.cost + 1
 
 		legalmove = self.legalmove()
 
