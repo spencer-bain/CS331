@@ -1,5 +1,7 @@
 #import numpy as np
+from problem import *
 from node import *
+from uninformed_search import *
 import sys
 argument = sys.argv
 goal = []
@@ -42,5 +44,5 @@ else:
 
 start = Node(start)
 goal = Node(goal)
-#print(sys.argv[1])
-start.debug()
+problem = Problem(start,goal)
+test = bfs(problem)

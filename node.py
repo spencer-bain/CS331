@@ -21,79 +21,11 @@ class Node:
 		legalmove = self.legalmove()
 
 	def legalmove(self):
-		if self.state[cl]>self.state[wl] and self.state[cr]>self.state[wr]:
+		if self.state[cl] >= self.state[wl] and self.state[cr] >= self.state[wr]:
 			return True
 		else:
 			return False
-
-	def mystate(self):
-		x = self.state
-		return x
-
 	
-	def generatechildren(self):
-		if self.legalmove:
-			if br:
-				print('boat right')
-				if self.state[cr] >= 2:
-				
-				#------------------------------------------------------------
-					x = self.mystate()
-					print(x)
-					newnode = Node(x)
-					newnode.state[cr] = newnode.state[cr] - 2
-					newnode.state[cl] = newnode.state[cl] + 2
-					newnode.state[br] = 0
-					newnode.state[bl] = 1
-					self.printstate()
-					action1 = Node(newnode.mystate(),self,self.cost + 1)
-					action1.printstate()
-				#------------------------------------------------------------
-				if self.state[wr] >= 2:
-					newstate = self.state
-					newstate[wr] = newstate[wr] - 2
-					newstate[wl] = newstate[wl] + 2
-					newstate[br] = 0
-					newstate[bl] = 1
-					action2 = Node(newstate,self,self.cost + 1)
-				#	action2.printstate()
-				#	print(self.state[wr])
-				#	self.printstate()
-				if self.state[cr] >= 1 and self.state[wr] >= 1:
-					newstate = self.state
-					newstate[cr] = newstate[cr] - 1
-					newstate[cl] = newstate[cl] + 1
-					newstate[wr] = newstate[wr] - 1
-					newstate[wl] = newstate[wl] + 1
-					newstate[br] = 0
-					newstate[bl] = 1
-					action3 = Node(newstate,self,self.cost + 1)
-				#	action3.printstate()
-				if self.state[wr] >= 1:
-					newstate = self.state
-					newstate[cr] = newstate[cr] - 1
-					newstate[cl] = newstate[cl] + 1
-					newstate[br] = 0
-					newstate[bl] = 1
-					action4 = Node(newstate,self,self.cost + 1)
-					action4.printstate()
-				if self.state[cr] >= 1:
-					newstate = self.state
-					newstate[wr] = newstate[wr] - 1
-					newstate[wl] = newstate[wl] + 1
-					newstate[br] = 0
-					newstate[bl] = 1
-					action5 = Node(newstate,self,self.cost + 1)
-					action5.printstate()
-
-
-			elif bl:
-				print('boat left')
-				
-			else:
-				print("what's up with the boat?")
-		else:
-			print("leaf node")
 
 	def printstate(self):
 		leftbank = []
@@ -109,3 +41,100 @@ class Node:
 		self.printstate()
 		print(bool(self.legalmove))
 		self.generatechildren()
+
+	def generatechildren(self):
+		if self.legalmove():
+			if self.state[br]:
+				if self.state[cr] >= 2:
+					newnode = Node(self.state[:],self,self.cost)
+					newnode.state[cr] = newnode.state[cr] - 2
+					newnode.state[cl] = newnode.state[cl] + 2
+					newnode.state[br] = 0
+					newnode.state[bl] = 1
+					self.action1 = newnode
+				if self.state[wr] >= 2:
+					newnode = Node(self.state[:],self,self.cost)
+					newnode.state[wr] = newnode.state[wr] - 2
+					newnode.state[wl] = newnode.state[wl] + 2
+					newnode.state[br] = 0
+					newnode.state[bl] = 1
+					self.action2 = newnode
+				if self.state[cr] >= 1 and self.state[wr] >= 1:
+					newnode = Node(self.state[:],self,self.cost)
+					newnode.state[cr] = newnode.state[cr] - 1
+					newnode.state[cl] = newnode.state[cl] + 1
+					newnode.state[wr] = newnode.state[wr] - 1
+					newnode.state[wl] = newnode.state[wl] + 1
+					newnode.state[br] = 0
+					newnode.state[bl] = 1
+					self.action3 = newnode
+				if self.state[wr] >= 1:
+					newnode = Node(self.state[:],self,self.cost)
+					newnode.state[cr] = newnode.state[cr] - 1
+					newnode.state[cl] = newnode.state[cl] + 1
+					newnode.state[br] = 0
+					newnode.state[bl] = 1
+					self.action4 = newnode
+				if self.state[wr] >= 1:
+					newnode = Node(self.state[:],self,self.cost)
+					newnode.state[wr] = newnode.state[wr] - 1
+					newnode.state[wl] = newnode.state[wl] + 1
+					newnode.state[br] = 0
+					newnode.state[bl] = 1
+					self.action5 = newnode
+			else:		
+				if self.state[cl] >= 2:
+					newnode = Node(self.state[:],self,self.cost)
+					newnode.state[cl] = newnode.state[cl] - 2
+					newnode.state[cr] = newnode.state[cr] + 2
+					newnode.state[bl] = 0
+					newnode.state[br] = 1
+					self.action1 = newnode
+				if self.state[wl] >= 2:
+					newnode = Node(self.state[:],self,self.cost)
+					newnode.state[wl] = newnode.state[wl] - 2
+					newnode.state[wr] = newnode.state[wr] + 2
+					newnode.state[bl] = 0
+					newnode.state[br] = 1
+					self.action2 = newnode
+				if self.state[cl] >= 1 and self.state[wl] >= 1:
+					newnode = Node(self.state[:],self,self.cost)
+					newnode.state[cl] = newnode.state[cl] - 1
+					newnode.state[cr] = newnode.state[cr] + 1
+					newnode.state[wl] = newnode.state[wl] - 1
+					newnode.state[wr] = newnode.state[wr] + 1
+					newnode.state[bl] = 0
+					newnode.state[br] = 1
+					self.action3 = newnode
+				if self.state[wl] >= 1:
+					newnode = Node(self.state[:],self,self.cost)
+					newnode.state[cl] = newnode.state[cl] - 1
+					newnode.state[cr] = newnode.state[cr] + 1
+					newnode.state[bl] = 0
+					newnode.state[br] = 1
+					self.action4 = newnode
+				if self.state[wl] >= 1:
+					newnode = Node(self.state[:],self,self.cost)
+					newnode.state[wl] = newnode.state[wl] - 1
+					newnode.state[wr] = newnode.state[wr] + 1
+					newnode.state[bl] = 0
+					newnode.state[br] = 1
+					self.action5 = newnode
+		else:
+			print('stuff is suppose to go here')	
+
+#-----------------------------------------------------------
+#Garbage Past this point
+#-----------------------------------------------------------
+def generatechildren(state):
+	#------------------------------------------------------------
+	newnode = Node(state[:])
+	newnode.state[cr] = newnode.state[cr] - 2
+	newnode.state[cl] = newnode.state[cl] + 2
+	newnode.state[br] = 0
+	newnode.state[bl] = 1
+	print('Here!!!')
+	newnode.printstate()
+	print(state)
+	#------------------------------------------------------------
+
