@@ -58,14 +58,11 @@ def bfsdebug(problem):
 	while len(frontier) != 0:
 		newnode = frontier.pop(0)
 		
-		
 		counter = counter + 1
 		print(counter)
 		print('parent node:')
 		newnode.printstate()
 		
-
-	
 		print('children nodes:')
 
 
@@ -73,7 +70,7 @@ def bfsdebug(problem):
 		for actions in problem.actions(newnode):
 			
 			print('costs:',actions.cost)
-
+			actions.printstate()
 			if tuple(actions.state) not in explored.keys() and actions not in frontier:
 				if problem.goaltest(actions):
 					return problem.solution(actions)
@@ -85,14 +82,11 @@ def bfsdebug(problem):
 					pop(index_of_old_frontier_node)
 					frontier.append(actions.state)
 
-			
-
 	
 		print()
 		print('New Frontier:')	
 		for state in frontier:
-			#node.printstate()
-			print(state)
+			state.printstate()
 		
 		print('explored list:')
 		print(explored)	
