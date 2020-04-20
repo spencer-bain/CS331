@@ -20,7 +20,7 @@ def astar(problem):
 		for actions in problem.actions(newnode):
 			if tuple(actions.state) not in explored.keys(): #and actions not in frontier:
 				if problem.goaltest(actions):
-					solutions = [problem.solution,count]
+					solutions = [problem.solution(actions),count]
 					return solutions
 				frontier.put((problem.evaluation(actions),actions))
 	

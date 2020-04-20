@@ -14,7 +14,6 @@ argument = sys.argv
 # If you run the program again with the same search algorithm,
 # but with different start and end goal it should overwrite said file.
 
-
 def showresults(test):
 	counter = 0
 	print("here is the Path:")
@@ -26,17 +25,9 @@ def showresults(test):
 				node.printstate()
 			else:
 				print(node)
+			#print(test)
 	else:
 		print(test)
-
-def writeresults(test):
-	counter = 0
-	if bool(test) is True:
-		for node in test:
-			counter = counter + 1
-			if type(node) is Node:
-				outputFile.write(node.stringstate())
-	outputFile.write(str(counter))
 
 def printresults():
 	print('help')
@@ -73,35 +64,34 @@ if str(mode)=='bfs':
 	showresults(test[0])
 	if(os.path.exists("outputBFS.txt")):
 		os.remove("outputBFS.txt")
-	outputFile = open("outputBFS.txt", "w")
-	writeresults(test)	
+	else:
+		outputFile = open("outputBFS.txt", "a")
+		outputFile.write("test")
+		outputFile.close()
+
 elif str(mode)=='dfs':
 	test = dfs(problem)
 	showresults(test[0])
 	if(os.path.exists("outputDFS.txt")):
 		os.remove("outputDFS.txt")
-  outputFile = open("outputDFS.txt", "w")
-	writeresults(test)
+	else:
+		outputFile = open("outputDFS.txt", "a")	
 
 elif str(mode)=='iddfs':
 	test = iddfs(problem)
 	showresults(test[0])
-
 	if(os.path.exists("outputIddfs.txt")):
 		os.remove("outputIddfs.txt")
-	outputFile = open("outputIDDFS.txt", "w")
-	writeresults(test)
-
+	else:
+		outputFile = open("outputIddfs.txt", "a")
 
 elif str(mode)=='astar':
 	test = astar(problem)
 	showresults(test[0])
 	if(os.path.exists("outputAstar.txt")):
 		os.remove("outputAstar.txt")
-
-	outputFile = open("outputAstar.txt", "w")
-	writeresults(test)
-
+	else:
+		outputFile = open("outputAstar.txt", "a")
 
 else:
 	print('error')
