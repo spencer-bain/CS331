@@ -1,3 +1,7 @@
+# The following formats as such
+# chickens, wolves, boat
+# [cl, wl, bl] left side of bank
+# [cr, wc, br] right side of bank
 cl = 0
 wl = 1
 bl = 2
@@ -10,8 +14,11 @@ class Node:
 	def __init__(self,state,cost=0,parent=None):
 		self.actions = []
 		
+		# current state
 		self.state   = state
+		# parent node
 		self.parent  = parent
+		# current cost = parent.cost + 1
 		self.cost    = cost
 
 		legalmove = self.legalmove()
@@ -56,26 +63,57 @@ class Node:
 		self.generatechildren()
 		for actions in self.actions:
 			actions.printstate()
+	
+	def __eq__(self,other):
+		'''
+		print('this is self')
+		self.printstate()
+		print('this is other')
+		other.printstate()
+		'''
+		if type(other) is Node:
+			if self.state == other.state:
+				return True
+			else:
+				return False
+		else:
+			return False
+	def __ne__(self,other):
+		#print('overloaded != is being called for Node')
+		if type(other) is Node:
+			if self.state != other.state or self.cost != other.cost:
+				return True
+			else:
+				return False
+		else:
+			return False
+
+	def __lt__(self,other):
+		if self.cost < other.cost:
+			return True
+		else:
+			return False
 
 	def generatechildren(self):
 		if self.legalmove():
+			newnodecost = self.cost + 1
 			if self.state[br]:
 				if self.state[cr] >= 2:
-					newnode = Node(self.state[:],self.cost,self)
+					newnode = Node(self.state[:],newnodecost,self)
 					newnode.state[cr] = newnode.state[cr] - 2
 					newnode.state[cl] = newnode.state[cl] + 2
 					newnode.state[br] = 0
 					newnode.state[bl] = 1
 					self.actions.append(newnode)
 				if self.state[wr] >= 2:
-					newnode = Node(self.state[:],self.cost,self)
+					newnode = Node(self.state[:],newnodecost,self)
 					newnode.state[wr] = newnode.state[wr] - 2
 					newnode.state[wl] = newnode.state[wl] + 2
 					newnode.state[br] = 0
 					newnode.state[bl] = 1
 					self.actions.append(newnode)
 				if self.state[cr] >= 1 and self.state[wr] >= 1:
-					newnode = Node(self.state[:],self.cost,self)
+					newnode = Node(self.state[:],newnodecost,self)
 					newnode.state[cr] = newnode.state[cr] - 1
 					newnode.state[cl] = newnode.state[cl] + 1
 					newnode.state[wr] = newnode.state[wr] - 1
@@ -84,14 +122,14 @@ class Node:
 					newnode.state[bl] = 1
 					self.actions.append(newnode)
 				if self.state[cr] >= 1:
-					newnode = Node(self.state[:],self.cost,self)
+					newnode = Node(self.state[:],newnodecost,self)
 					newnode.state[cr] = newnode.state[cr] - 1
 					newnode.state[cl] = newnode.state[cl] + 1
 					newnode.state[br] = 0
 					newnode.state[bl] = 1
 					self.actions.append(newnode)
 				if self.state[wr] >= 1:
-					newnode = Node(self.state[:],self.cost,self)
+					newnode = Node(self.state[:],newnodecost,self)
 					newnode.state[wr] = newnode.state[wr] - 1
 					newnode.state[wl] = newnode.state[wl] + 1
 					newnode.state[br] = 0
@@ -99,21 +137,21 @@ class Node:
 					self.actions.append(newnode)
 			else:		
 				if self.state[cl] >= 2:
-					newnode = Node(self.state[:],self.cost,self)
+					newnode = Node(self.state[:],newnodecost,self)
 					newnode.state[cl] = newnode.state[cl] - 2
 					newnode.state[cr] = newnode.state[cr] + 2
 					newnode.state[bl] = 0
 					newnode.state[br] = 1
 					self.actions.append(newnode)
 				if self.state[wl] >= 2:
-					newnode = Node(self.state[:],self.cost,self)
+					newnode = Node(self.state[:],newnodecost,self)
 					newnode.state[wl] = newnode.state[wl] - 2
 					newnode.state[wr] = newnode.state[wr] + 2
 					newnode.state[bl] = 0
 					newnode.state[br] = 1
 					self.actions.append(newnode)
 				if self.state[cl] >= 1 and self.state[wl] >= 1:
-					newnode = Node(self.state[:],self.cost,self)
+					newnode = Node(self.state[:],newnodecost,self)
 					newnode.state[cl] = newnode.state[cl] - 1
 					newnode.state[cr] = newnode.state[cr] + 1
 					newnode.state[wl] = newnode.state[wl] - 1
@@ -122,14 +160,14 @@ class Node:
 					newnode.state[br] = 1
 					self.actions.append(newnode)
 				if self.state[cl] >= 1:
-					newnode = Node(self.state[:],self.cost,self)
+					newnode = Node(self.state[:],newnodecost,self)
 					newnode.state[cl] = newnode.state[cl] - 1
 					newnode.state[cr] = newnode.state[cr] + 1
 					newnode.state[bl] = 0
 					newnode.state[br] = 1
 					self.actions.append(newnode)
 				if self.state[wl] >= 1:
-					newnode = Node(self.state[:],self.cost,self)
+					newnode = Node(self.state[:],newnodecost,self)
 					newnode.state[wl] = newnode.state[wl] - 1
 					newnode.state[wr] = newnode.state[wr] + 1
 					newnode.state[bl] = 0
