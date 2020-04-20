@@ -43,6 +43,10 @@ class Node:
 			rightbank.append(self.state[i])
 		print(leftbank)
 		print(rightbank)
+		
+	def stringstate(self):
+		state_string = f"[{self.state[0]}, {self.state[1]}, {self.state[2]}] \n[{self.state[3]}, {self.state[4]}, {self.state[5]}] \n"
+		return state_string
 
 	def debug(self):
 		self.printstate()

@@ -1,8 +1,30 @@
 fisrt_python_script.py
 command_line_inpute.py
+<<<<<<< Updated upstream
 outputBFS.txt
 outputBFS.txt
 outputDFS.txt
 outputBFS.txt
 outputBFS.txt
 outputBFS.txt
+=======
+overloading_operatores.py
+outputDFS.txt
+outputAstar.txt
+outputBFS.txt
+outputAstar.txt
+outputAstar.txt
+__pycache__/informed_search.cpython-36.pyc
+__pycache__/node.cpython-36.pyc
+__pycache__/problem.cpython-36.pyc
+__pycache__/uninformed_search.cpython-36.pyc
+__pycache__/problem.cpython-36.pyc
+__pycache__/node.cpython-36.pyc
+__pycache__/node.cpython-36.pyc
+>>>>>>> Stashed changes
+outputAstar.txt
+outputAstar.txt
+outputAstar.txt
+outputAstar.txt
+__pycache__/problem.cpython-36.pyc
+__pycache__/node.cpython-36.pyc
