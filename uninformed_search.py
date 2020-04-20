@@ -1,21 +1,20 @@
 from node import *
 from problem import *
-#def bfs(problem):
-
-#	frontier = []
-#	explored = set([tuple(node)])
 
 
-#---------------------------------------------------
-#examples
-#---------------------------------------------------
+def bfs(problem):
 
-<<<<<<< Updated upstream
-#	explored = set([tuple(problem.start.state)])
-#	explored.add(tuple(problem.goal.state))
-#	if tuple(problem.start.state) in explored and tuple(problem.goal.state):
-#		print('yep')
-=======
+	startnode = Node(problem.start.state,0,None)
+	if startnode.state == problem.goal.state:
+		return problem.solution(startnode) #place holder
+	
+	frontier = [startnode] #making frontier
+	explored = {} #{tuple(startnode.state):startnode.cost}#making explored hash table
+	
+	while len(frontier) != 0:
+		newnode = frontier.pop(0)
+
+
 		explored[tuple(newnode.state)] = newnode.cost
 		for actions in problem.actions(newnode):
 
@@ -46,60 +45,6 @@ def dfs(problem):
 	
 	
 	return False	
-		
-
-'''
-def bfsdebug(problem):
-	startnode = Node(problem.start.state,0,None)
-	if startnode.state == problem.goal.state:
-		return problem.solution(startnode)
-	
-	frontier = [startnode] #making frontier
-	explored = {} #{tuple(startnode.state):startnode.cost}#making explored hash table
-	counter = 0	
-	while len(frontier) != 0:
-		newnode = frontier.pop(0)
-		
-		counter = counter + 1
-		print(counter)
-		print('parent node:')
-		newnode.printstate()
-		
-		print('children nodes:')
-
-
-		explored[tuple(newnode.state)] = newnode.cost
-		for actions in problem.actions(newnode):
-			
-			print('costs:',actions.cost)
-			actions.printstate()
-			if tuple(actions.state) not in explored.keys() and actions not in frontier:
-				if problem.goaltest(actions):
-					return problem.solution(actions)
-				frontier.append(actions)
-			elif actions in frontier:
-				index_of_old_frontier_node = frontier.index(actions)
-				old_frontier_node = frontier[index_of_old_frontier_node]
-				if actions < old_frontier_node:
-					pop(index_of_old_frontier_node)
-					frontier.append(actions.state)
-
-	
-		print()
-		print('New Frontier:')	
-		for state in frontier:
-			state.printstate()
-		
-		print('explored list:')
-		print(explored)	
-		
-		print()
-#		if counter > 3: break
-	
-	
-	return False	
-	'''
-		
 		
 def dfsdebug(problem):		
 	startnode = Node(problem.start.state,0,None)
@@ -133,8 +78,6 @@ def recursiveIDDFSdebug(startnode,problem,limit,explored):
 	
 	print('limit: ',limit)
 #	print('Node being considerd')
-	print(f' {800 - limit}')
-	startnode.printstate()
 	#results = [None]
 
 	if startnode.state == problem.goal.state:
@@ -184,5 +127,4 @@ def iddfs(problem):
 		results = idfs(problem,i)
 		if 'cut off' not in results:
 			return results
-	
->>>>>>> Stashed changes
+
