@@ -21,7 +21,10 @@ def showresults(test):
 		for node in test:
 			print(counter)
 			counter = counter + 1
-			node.printstate()
+			if type(node) is Node:
+				node.printstate()
+			else:
+				print(node)
 			#print(test)
 	else:
 		print(test)
@@ -58,7 +61,7 @@ problem = Problem(start,goal)
 mode = argument[3]
 if str(mode)=='bfs':
 	test = bfs(problem)
-	showresults(test)
+	showresults(test[0])
 	if(os.path.exists("outputBFS.txt")):
 		os.remove("outputBFS.txt")
 	else:
@@ -68,7 +71,7 @@ if str(mode)=='bfs':
 
 elif str(mode)=='dfs':
 	test = dfs(problem)
-	showresults(test)
+	showresults(test[0])
 	if(os.path.exists("outputDFS.txt")):
 		os.remove("outputDFS.txt")
 	else:
@@ -76,7 +79,7 @@ elif str(mode)=='dfs':
 
 elif str(mode)=='iddfs':
 	test = iddfs(problem)
-	showresults(test)
+	showresults(test[0])
 	if(os.path.exists("outputIddfs.txt")):
 		os.remove("outputIddfs.txt")
 	else:
@@ -94,4 +97,4 @@ else:
 	print('error')
 
 print('this is the end of the path')
-
+print('number of expanded nodes:',test[1])

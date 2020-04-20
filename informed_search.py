@@ -10,17 +10,18 @@ def astar(problem):
 	frontier = PriorityQueue() #making frontier
 	frontier.put((startnode.state[cr],startnode))
 	explored = {} #{tuple(startnode.state):startnode.cost}#making explored hash table
-	counter = 0	
+	count = 0	
 	while not frontier.empty():
 		tuple_with_newnode = frontier.get()
 		newnode = tuple_with_newnode[1]
 		
-		counter = counter + 1
+		count = count + 1
 		explored[tuple(newnode.state)] = newnode.cost
 		for actions in problem.actions(newnode):
 			if tuple(actions.state) not in explored.keys(): #and actions not in frontier:
 				if problem.goaltest(actions):
-					return problem.solution(actions)
+					solutions = [problem.solution,count]
+					return solutions
 				frontier.put((problem.evaluation(actions),actions))
 	
 	return False	
