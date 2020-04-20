@@ -34,24 +34,47 @@ class Problem:
 		return self.huristic(node) + 1
 
 	def huristic(self,node):
-		if node.state == self.goaltest:
+
+		if node.state == self.goaltest(node):
+		#entering if we have our solution
 			return 0
-		#testing first special case, 3 chicken and 3 wolves
+
 		elif self.goal.state[cl]-self.goal.state[wl] == 0 and self.goal.state[cl] == 3:
+		#entering if special case, 3 chicken and 3 wolves
 			return 0
+
 		elif node.parent == None:
-			if self.start.state[wr]-node.state[wl]==1 and self.start.state[cr]-node.state[cl]>=1:
+		#entering if a parent node is the start and we are action 3
+
+			if node.state[wl]-self.start.state[wl]==1 and ndoe.state[cl]-self.start.state[cl]==1:
+			#entering if we are action 3
 				return node.state[cr]
+			
 			else:
-				print('wow no one has a parent?')
+			#entering if we are not action 3
 				return node.state[cr]+3
-		else:
-			if node.state[bl] and node.parent.state[wr]-node.state[wl] == 1 and node.parent.state[cr]-node.state[cl] == 1:
+
+		elif node.parent.state[br] and node.state[wl]-node.parent.state[wl]==1 and node.state[cl]-node.parent.state[cl]==1:
+		#entering if parent boat is right and we are and action 3
+			return node.state[cr]
+
+		elif node.parent.state[bl]==1:	
+		#entering if parent has the boat on the left
+			if node.parent.state[wl]-node.state[wl]==1 and node.parent.state[cl]-node.state[cl]==1:
+			#entering if action 3
+				return node.state[cr]+3
+
+			elif node.parent.state[wl] == node.parent.state[cl] and node.parent.state[wl]-node.state[wl] == 1:
+			#entering if action 5
 				return node.state[cr]
-			elif node.state[br] and node.parent.state[wl]-node.state[wl] >= 1:
+
+			elif node.parent.state[wl] < node.parent.state[cl] and node.parent.state[cl]-node.state[cl]==1:
+			#entering if action 4
 				return node.state[cr]
+
 			else:
-				print('here')
+			#entering if action 1 or 2
 				return node.state[cr]+3
-		
+
+		return node.state[cr]+3
 	

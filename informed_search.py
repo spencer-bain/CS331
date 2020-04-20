@@ -16,7 +16,30 @@ def astar(problem):
 		newnode = tuple_with_newnode[1]
 		
 		counter = counter + 1
-		print(counter)
+		explored[tuple(newnode.state)] = newnode.cost
+		for actions in problem.actions(newnode):
+			if tuple(actions.state) not in explored.keys(): #and actions not in frontier:
+				if problem.goaltest(actions):
+					return problem.solution(actions)
+				frontier.put((problem.evaluation(actions),actions))
+	
+	return False	
+		
+def astardebug(problem):
+	startnode = Node(problem.start.state,0,None)
+	if startnode.state == problem.goal.state:
+		return problem.solution(startnode)
+	
+	frontier = PriorityQueue() #making frontier
+	frontier.put((startnode.state[cr],startnode))
+	explored = {} #{tuple(startnode.state):startnode.cost}#making explored hash table
+	counter = 0	
+	while not frontier.empty():
+		tuple_with_newnode = frontier.get()
+		newnode = tuple_with_newnode[1]
+		
+		counter = counter + 1
+		print('nodes expanded',counter)
 		print('node:')
 		newnode.printstate()
 		if type(newnode.parent) is Node:	
@@ -30,7 +53,7 @@ def astar(problem):
 		for actions in problem.actions(newnode):
 			
 			print('costs:',problem.huristic(actions))
-			actions.printstate()
+			#actions.printstate()
 			if tuple(actions.state) not in explored.keys(): #and actions not in frontier:
 				if problem.goaltest(actions):
 					return problem.solution(actions)
@@ -58,7 +81,6 @@ def astar(problem):
 		
 		print()
 #		if counter > 3: break
-	
 	
 	return False	
 		

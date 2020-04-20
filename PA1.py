@@ -93,5 +93,5 @@ elif str(mode)=='astar':
 else:
 	print('error')
 
-
+print('this is the end of the path')
 
